@@ -3,7 +3,6 @@ import { useDeleteSavedPost, useLikePost, useSavePost, useUnLikePost } from '@/l
 import { Loading } from '.'
 import { useAuthContext } from '@/context/authContext'
 import useShowActions from '@/hooks/useShowActions'
-import useFindSavedId from '@/hooks/useFindSavedId'
 
 
 type postStatsType = {
@@ -14,7 +13,7 @@ const PostStats = ({ post }: postStatsType) => {
   const { user } = useAuthContext();
 
   const userLikedId: string = useMemo(() => post && user?.likes?.find(v => v.post?.$id == post.$id)?.$id, [user?.likes]);
-  const findSavedId: string = useFindSavedId({post:post || undefined, user:user});
+  const findSavedId: string = useMemo(() =>post && user?.save?.find((v:any) => v.post?.$id === post.$id)?.$id,[user?.save]);
 
   const { mutateAsync: likePost, isPending: isPendingLike } = useLikePost();
   const { mutateAsync: unLikePost, isPending: isPendingUnLike } = useUnLikePost();

@@ -22,7 +22,6 @@ interface INewPost {
 interface IDeletePost {
   postId: string;
   imageID: string;
-  findSavedId: string;
 };
 
 

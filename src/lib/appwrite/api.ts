@@ -273,9 +273,8 @@ export async function updatePost(post: IUpdatePost) {
 
 export async function deletePost(post: IDeletePost) {
 	try {
-		if (post.findSavedId) await deleteSavedPost(post.findSavedId);
-
-		await databases.updateDocument(DATABASE_ID, POSTS_COLLECTION_ID, post?.postId, {likes:[]})
+		
+		await databases.updateDocument(DATABASE_ID, POSTS_COLLECTION_ID, post?.postId, {likes:[], save:[]})
 
 		await new Promise(resolve => setTimeout(resolve, 1500));
 

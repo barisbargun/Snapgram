@@ -7,7 +7,6 @@ import { useDeletePost, useGetPostById } from '@/lib/react-query/queries';
 import { useToast } from '@/components/ui/use-toast';
 import { toastTexts } from '@/constants/toastTexts';
 import { Loading } from '@/components/shared';
-import useFindSavedId from '@/hooks/useFindSavedId';
 
 const PostDetails = () => {
 
@@ -20,11 +19,13 @@ const PostDetails = () => {
   const { mutateAsync: deletePost, isPending:isDeletePending } = useDeletePost();
 
   const postTags = useMemo(() => '#' + post?.tags?.replace(/,/g, ' #').toLowerCase(), [post?.tags]);
-  const findSavedId:string = useFindSavedId({post:post || undefined, user:user});
 
+  console.log(user);
+  console.log(post);
+  console.log(user?.save?.find((v:any) => v.post?.$id === post?.$id)?.$id)
   const handleDeletePost = async () => {
     if (post) {
-      const res = await deletePost({ postId: post?.$id, imageID: post?.imageID, findSavedId })
+      const res = await deletePost({ postId: post?.$id, imageID: post?.imageID })
       if (res) {
         toast(toastTexts.delete);
         setTimeout(() => {
