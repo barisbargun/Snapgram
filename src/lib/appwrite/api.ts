@@ -305,7 +305,7 @@ export async function getRecentPosts() {
 
 }
 
-export async function getInfinitePosts({ pageParam, searchTerm, condition }:IGetInfinitePosts) {
+export async function getInfinitePosts({ pageParam, searchTerm, condition }:IGetInfinitePosts):Promise<Models.DocumentList<Models.Document> | null> {
 	const queries: any[] = [Query.orderDesc("$createdAt"), Query.limit(8)];
 
 	if (pageParam) {
@@ -321,7 +321,7 @@ export async function getInfinitePosts({ pageParam, searchTerm, condition }:IGet
 	}
 
 	try {
-		const res = databases.listDocuments(DATABASE_ID, POSTS_COLLECTION_ID, queries);
+		const res = await databases.listDocuments(DATABASE_ID, POSTS_COLLECTION_ID, queries);
 		if (!res) throw Error;
 		return res;
 
@@ -331,6 +331,9 @@ export async function getInfinitePosts({ pageParam, searchTerm, condition }:IGet
 	}
 
 }
+
+
+
 
 export async function getPostsById(postId: string) {
 	try {
