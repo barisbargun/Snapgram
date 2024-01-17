@@ -22,9 +22,9 @@ const LeftSideBar = () => {
   const { pathname } = useLocation();
 
   return (
-    <nav className='leftsidebar_container'>
+    <nav className='leftsidebar_container '>
 
-      <div className='leftsidebar'>
+      <div className='leftsidebar overflow-y-auto'>
         <div className='mb-2'>
           <Link to="/">
             <img src="/assets/images/logo.svg" alt='logo' />
@@ -52,7 +52,7 @@ const LeftSideBar = () => {
 
         <div className='flex flex-col justify-between mt-2'>
 
-          <div>
+          <div className=''>
             {leftSideBarLinks.map(v => {
               const isActive = pathname === v.root;
               return (

@@ -228,11 +228,11 @@
 
   /* Left sidebar */
   .leftsidebar_container {
-    @apply min-w-[270px]
+    @apply min-w-[270px];
   }
 
   .leftsidebar {
-    @apply fixed hidden md:flex px-6 py-10 flex-col min-w-[270px] bg-dark-2 h-fit gap-5 min-h-[90vh];
+    @apply fixed hidden md:flex px-6 py-10 flex-col min-w-[270px] bg-dark-2 h-full gap-5 min-h-[90vh];
   }
 
   .leftsidebar-link {
