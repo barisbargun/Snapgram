@@ -6,16 +6,16 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { signinSchema } from "@/lib/validation"
-import {Loading} from "@/components/shared";
-import { Link, useNavigate } from "react-router-dom";
+import { Loading } from "@/components/shared";
+import { Link } from "react-router-dom";
 import { useAuthContext } from "@/context/authContext";
 import { useSignInAccount } from "@/lib/react-query/queries";
+import { toastTexts } from "@/constants/toastTexts";
 
 const SigninForm = () => {
 
-  const navigate = useNavigate();
 
-  const {mutateAsync:signInAccount, isPending:loading} = useSignInAccount();
+  const { mutateAsync: signInAccount, isPending: loading } = useSignInAccount();
   const { checkLogin } = useAuthContext();
   const { toast } = useToast();
 
@@ -32,13 +32,11 @@ const SigninForm = () => {
   async function onSubmit(values: z.infer<typeof signinSchema>) {
     const response = await signInAccount(values);
     if (response && await checkLogin()) {
-      toast({ title: "Login success!", description: "You are redirecting to main page." })
-      setTimeout(() => {
-        form.reset();
-        navigate("/");
-      }, 2000);
+      form.reset();
+      toast(toastTexts.login)
+
     } else {
-      toast({ variant: "destructive", title: "Login failed!", description: "Please try again." })
+      toast(toastTexts.loginFailed)
     }
   }
 

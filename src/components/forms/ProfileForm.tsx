@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 import { toast } from '../ui/use-toast'
 import { Textarea } from '../ui/textarea'
+import { toastTexts } from '@/constants/toastTexts'
 
 const ProfileForm = ({ user }: { user: IUser }) => {
 
@@ -32,11 +33,13 @@ const ProfileForm = ({ user }: { user: IUser }) => {
 
     const res = await updateUser({ file: values.file, user: { ...user, ...values } });
     if (res) {
-      toast({ title: "Profile changed successfully!", description: "You are redirecting to main page." })
+      toast(toastTexts.editProfile)
       setTimeout(() => {
         form.reset();
         navigate("/");
       }, 2000);
+    } else {
+      toast(toastTexts.editProfileFailed);
     }
 
   }

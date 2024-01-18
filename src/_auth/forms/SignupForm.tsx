@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "@/context/authContext";
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queries";
 import { toast } from "@/components/ui/use-toast";
+import { toastTexts } from "@/constants/toastTexts";
 
 
 const SignupForm = () => {
@@ -33,7 +34,7 @@ const SignupForm = () => {
   async function onSubmit(values: z.infer<typeof signupSchema>) {
     const newUser = await signUpAccount(values);
     if (!newUser) {
-      toast({ title: "Sign up failed. Please try again.", });
+      toast(toastTexts.registerFailed);
       return;
     }
 
@@ -41,13 +42,13 @@ const SignupForm = () => {
 
 
     if (loginUser && await checkLogin()) {
-      toast({ title: "Registered successfully!", description: "You are redirecting to main page." })
+      toast(toastTexts.register)
       setTimeout(() => {
         form.reset();
         navigate("/");
       }, 2000);
     } else {
-      toast({ variant: "destructive", title: "Login failed!", description: "Please try again." })
+      toast(toastTexts.loginFailed)
     }
   }
 

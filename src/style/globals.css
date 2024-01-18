@@ -236,7 +236,7 @@
   }
 
   .leftsidebar-link {
-    @apply rounded-lg base-medium hover:bg-primary-500 transition;
+    @apply rounded-lg base-medium group-hover:bg-primary-500 transition;
   }
 
   /* Post Card */

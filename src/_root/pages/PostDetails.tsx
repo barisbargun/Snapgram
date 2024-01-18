@@ -20,9 +20,6 @@ const PostDetails = () => {
 
   const postTags = useMemo(() => '#' + post?.tags?.replace(/,/g, ' #').toLowerCase(), [post?.tags]);
 
-  console.log(user);
-  console.log(post);
-  console.log(user?.save?.find((v:any) => v.post?.$id === post?.$id)?.$id)
   const handleDeletePost = async () => {
     if (post) {
       const res = await deletePost({ postId: post?.$id, imageID: post?.imageID })

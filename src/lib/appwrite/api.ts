@@ -24,7 +24,7 @@ export async function createUserAccount(user: INewUser) {
 		});
 		return newUser;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null;
 	}
 
@@ -47,7 +47,8 @@ export async function saveUserToDB(user: {
 
 		return newUser;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
+		return null;
 	}
 }
 
@@ -57,7 +58,8 @@ export async function signInAccount(user: { email: string; password: string }) {
 
 		return session;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
+		return null;
 	}
 }
 
@@ -67,7 +69,8 @@ export async function getAccount() {
 
 		return currentAccount;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
+		return null;
 	}
 }
 
@@ -86,7 +89,7 @@ export async function getCurrentUser() {
 		return currentUser;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null;
 	}
 }
@@ -96,7 +99,8 @@ export async function signOutAccount() {
 		const session = await account.deleteSession("current");
 		return session;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
+		return null;
 	}
 }
 
@@ -122,7 +126,7 @@ export async function getInfiniteUsers(pageParam: number, searchTerm:string) {
 		return res;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null;
 	}
 
@@ -136,7 +140,7 @@ export async function getUserById(userId: string) {
 		return response;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null;
 	}
 }
@@ -178,7 +182,7 @@ export async function updateUser(user: IUpdateUser): Promise<IUser | Models.Docu
 		return response;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null
 	}
 }
@@ -217,7 +221,7 @@ export async function createPost(post: INewPost) {
 
 
 	} catch (error) {
-		console.log(error)
+		// console.log(error)
 		return null;
 	}
 
@@ -265,7 +269,7 @@ export async function updatePost(post: IUpdatePost) {
 
 
 	} catch (error) {
-		console.log(error)
+		// console.log(error)
 		return null;
 	}
 
@@ -285,7 +289,7 @@ export async function deletePost(post: IDeletePost) {
 		return post;
 
 	} catch (error) {
-		console.log(error)
+		// console.log(error)
 		return null;
 	}
 
@@ -298,13 +302,14 @@ export async function getRecentPosts() {
 		if (!posts) throw Error
 		return posts;
 	} catch (error) {
-		console.log(error)
+		// console.log(error)
 		return null;
 	}
 
 }
 
-export async function getInfinitePosts({ pageParam, searchTerm, condition }:IGetInfinitePosts):Promise<Models.DocumentList<Models.Document> | null> {
+export async function getInfinitePosts({ pageParam, searchTerm, condition }:IGetInfinitePosts)
+:Promise<Models.DocumentList<Models.Document> | null> {
 	const queries: any[] = [Query.orderDesc("$createdAt"), Query.limit(8)];
 
 	if (pageParam) {
@@ -325,14 +330,11 @@ export async function getInfinitePosts({ pageParam, searchTerm, condition }:IGet
 		return res;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null;
 	}
 
 }
-
-
-
 
 export async function getPostsById(postId: string) {
 	try {
@@ -341,12 +343,11 @@ export async function getPostsById(postId: string) {
 		if (!posts) throw Error
 		return posts;
 	} catch (error) {
-		console.log(error)
+		// console.log(error)
 		return null;
 	}
 
 }
-
 
 // ============================== LIKE / UNLIKE POST
 
@@ -359,7 +360,7 @@ export async function likePost(userId:string, postId:string) {
 		return likedPost;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null;
 	}
 
@@ -374,7 +375,7 @@ export async function unLikePost(unLikeProps:IUnLike) {
 		return unLikeProps;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
 		return null;
 	}
 
@@ -394,7 +395,8 @@ export async function savePost(userId: string, postId: string) {
 		if (!post) throw Error;
 		return post;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
+		return null;
 	}
 }
 
@@ -406,7 +408,8 @@ export async function deleteSavedPost(savedID: string) {
 		if (!res) throw Error;
 		return savedID;
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
+		return null;
 	}
 
 }
@@ -423,7 +426,8 @@ export async function uploadFile(file: File) {
 		if (!response) throw Error;
 		return response;
 	} catch (error) {
-		console.log(error)
+		// console.log(error)
+		return null;
 	}
 }
 
@@ -435,7 +439,8 @@ export function filePreview(fileId: string) {
 		return response;
 
 	} catch (error) {
-		console.log(error);
+		// console.log(error);
+		return null;
 	}
 }
 
@@ -446,7 +451,7 @@ export async function deleteFile(fileID: string): Promise<{ status: string } | n
 		if (!response) throw Error;
 		return { status: 'ok' };
 	} catch (error) {
-		console.log(error)
+		// console.log(error)
 		return null;
 	}
 }

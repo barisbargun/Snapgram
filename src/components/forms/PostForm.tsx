@@ -12,6 +12,7 @@ import FileUploader from '../shared/FileUploader'
 import { useCreatePost, useUpdatePost } from '@/lib/react-query/queries'
 import { useAuthContext } from '@/context/authContext'
 import { useToast } from '../ui/use-toast'
+import { toastTexts } from '@/constants/toastTexts'
 
 type PostFormProps = {
   post?: IPost,
@@ -46,12 +47,12 @@ const PostForm = ({ post, action }: PostFormProps) => {
         tags: values.tags
       });
       if (response) {
-        toast({ title: "Successfully added", description: "You are redirecting to home page" })
+        toast(toastTexts.addPost)
         setTimeout(() => {
           form.reset()
           navigate("/");
         }, 2500);
-      } else toast({ variant: 'destructive', title: "An error happened", description: "Try again." })
+      } else toast(toastTexts.addPostFailed)
       return;
     }
 
